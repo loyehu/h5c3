@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<video src="trailer.mp4" autoplay="true" controls="true" id="video" width="600px"></video>
+		<button id="btn">暂停</btn>
+		<script>
+			
+			var oVideo = document.getElementById("video");
+			var oBtn = document.getElementById("btn");
+
+			
+			oBtn.onclick = function(){
+				// 这个，判断条件也可以写成oVideo.played或者oVideo.paused
+				if(oBtn.innerText == "暂停"){
+					// 暂停视频		只能在JS对象中使用
+					oVideo.pause();
+					oBtn.innerText = "播放";
+					console.log(oBtn.innerText);
+				}
+				else{
+					// 播放视频
+					oVideo.play();
+					oBtn.innerText = "暂停";
+				}
+			}
+		</script>
+	</body>
+</html>

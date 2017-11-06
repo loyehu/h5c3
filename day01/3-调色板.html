@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		颜色：<input type="color"/>
+		<script type="text/javascript" src="js/jquery-3.2.1.js" ></script>
+		<script>
+			/*
+			 *  1. change事件
+			 * 	2. 获取颜色值
+			 * 	3. 给body设置相应的颜色值
+			 */
+			
+			$("input").change(function(){
+				var str = $(this).val();
+				
+				$("body").css({"background-color": str});
+				console.log( str );
+				
+			});
+		</script>
+	</body>
+</html>

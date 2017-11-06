@@ -1,0 +1,58 @@
+
+1. 新增标签
+	<header> 头部
+	<section> 区域
+	<main> 主要区域
+	<footer> 尾部
+	<nav> 导航条
+	<aside> 侧边栏
+	<article> 文章
+	例：
+		<header>	// 头部
+			<nav></nav>		// 导航
+		</header>
+		<main>		// 内容
+			<aside></aside>		// 左侧边栏
+			<article></article>		// 右边
+		</main>
+		<footer></footer>	// 脚部
+		
+2. 新语义标签
+	<template>模板</template>	不直接显示在页面
+	<address>地址</address>	默认为斜体
+	<time>时间</time>
+	<mark>重点标识</mark>
+	<ruby>拼音注释</ruby>
+		例：<ruby>冇<rt>mao<rt><ruby>
+	<figure>	// 整个图片
+		<img src=""/>	// 图片
+		<figcaption>图片说明</figcaption>
+	</figure>
+
+3. eval() 系统提供的函数，作用是：以js的方式执行字符串
+
+4. 	video 视频
+	视频暂停 pause
+	视频播放 play
+	视频加载 load （会全部重新加载）
+	视频静音 muted		oVideo.muted = true
+	
+	video 支持的视频格式是MP4和ogv
+
+5. audio 音频
+	支持格式：MP3 和 ogg(开源免费的格式)
+	JS
+	1. 得到js原生对象
+	2. 方法： play、pause、load
+	3. 属性： volumn(声音音量0~1)，muted
+
+6. 本地存储	 localStorage （h5 默认提供的存储对象）
+	// username 保存的名字
+	// loye 保存的值
+	存储: localStorage.setItem("username","loye");
+	
+	获取: localStorage.getItem("username");
+	
+	删除: localStorage.removeItem();
+	
+	setTimeout 延时器，只执行一次
