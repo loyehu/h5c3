@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul{
+				padding: 20px;
+				list-style: none;
+				margin: 0 auto;
+			}
+			ul li{
+				width: 140px;
+				height: 40px;
+				background-color: palevioletred;
+				float: left;
+				margin-left: 20px;
+				text-align: center;
+				line-height: 40px;
+				cursor: pointer;
+			}
+			#btn{
+				margin-top: 30px;
+				margin-left: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="btn">音乐播放</button>
+		<ul>
+			<li>do</li>
+			<li>re</li>
+			<li>mi</li>
+			<li>fa</li>
+			<li>sol</li>
+			<li>la</li>
+			<li>si</li>
+			<li>do</li>
+		</ul>
+		
+		<div>
+			<audio src="mp3/1.mp3"></audio>
+			<audio src="mp3/2.mp3"></audio>
+			<audio src="mp3/3.mp3"></audio>
+			<audio src="mp3/4.mp3"></audio>
+			<audio src="mp3/5.mp3"></audio>
+			<audio src="mp3/6.mp3"></audio>
+			<audio src="mp3/7.mp3"></audio>
+			<audio src="mp3/8.mp3"></audio>
+		</div>
+		<script>
+		
+			var aLi = document.getElementsByTagName("li");
+			var aAudio = document.getElementsByTagName("audio");
+			var oBtn = document.getElementById("btn");
+			
+			// 思路：
+			//  1. 给整个页面绑定键盘按下事件
+			//  2. 获取对应音乐下标
+			//  3. 播放对应下标的音乐
+			
+			
+			// 因为有很多按键所以用数组保存
+			var arr = [];
+			
+			window.onkeydown = function(e){
+				
+				var i = e.keyCode - 49;
+				// 按一个键，将他存入数组中
+				arr.push(i);
+				// 将数组转换为字符串对象
+				var str = JSON.stringify(arr);
+				// 保存到本地存储
+				localStorage.setItem("qp", str);
+				
+				// 播放之前先全部保存
+				aAudio[i].load();
+				// 播放
+				aAudio[i].play();
+				
+			}
+			
+			// 按钮点击时，播放存储音乐
+			
+			oBtn.onclick = function(){
+				// 先得到保存的字符串
+				var str = localStorage.getItem("qp");
+				// 将字符串转换为对象
+				var arr = JSON.parse(str);
+				
+				var i = 0;
+				// 创建定时器，每0.5秒执行一个琴键
+				var timer = setInterval(function(){
+					console.log(arr.length);
+					if(i >= arr.length){
+						clearInterval(timer);
+						return ;
+					}
+					var x = arr[i];
+					console.log(x);
+					aAudio[x].load();
+					aAudio[x].play();
+					i++;
+					
+				},500);
+			}
+			
+		</script>
+	</body>
+</html>
