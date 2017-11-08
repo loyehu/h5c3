@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.stage{
+				margin: 240px auto;
+				width: 300px;
+				height: 300px;
+				border: 1px solid plum;
+				perspective: 1200px;
+			}
+			.stage .unit{
+				position: relative;
+				transition: all 3s ease 0s;
+				transform-style: preserve-3d;
+			}
+			.unit img:nth-child(1){
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			.unit img:nth-child(2){
+				transform: rotateX(-90deg) translateZ(150px);
+			}
+			.unit img:nth-child(1){
+				transform: translateZ(150px);
+			}
+			.stage:hover .unit{
+				transform: rotateX(90deg);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="stage">
+			<div class="unit">
+				<img src="img/liu.jpg" width="300px"/>
+				<img src="img/mie.jpg" width="300px"/>
+			</div>
+		</div>
+	</body>
+</html>

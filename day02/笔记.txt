@@ -1,0 +1,76 @@
+
+1. 	判断IE版本
+
+	<!--IE中也会判断>
+	<!--[if lte IE8]>   小于IE8、e表示等于，可以不写
+	<![endif]-->
+
+2. 属性选择器	[]是css3新增的功能，作用属性选择
+	
+	[属性名]	// 例：[title]
+	
+	标签名[属性名]：表示所有标签里面具有这个属性的元素
+	
+	标签名[属性名=属性值]：表示所欲标签中具有属性和属性值为这个的元素
+	
+	标签[属性^=字母]：在这个标签中，以这个字母开头的属性元素，结束用$表示
+	
+	标签[属性~=字母]：~代表空格
+	
+	标签[属性|=字母]：|表示属性以字母开头，还必须以减号分割
+	
+	标签[属性*=字母]：任意字母匹配
+
+3. 序列选择器
+	
+	例： 	li:first-child	// 表示li里面的第一个元素
+		li:last-child	// 表示li里面的最后一个元素
+		li:nth-child(1~n)	// 表示li里面的第n个元素（从1开始）
+		li:nth-child(even)	//表示li里面的所有偶数（也可以写2n）
+		li:nth-child(odd)	// 表示li里面的所有奇数
+		li:nth-child(3n)	// 表示li里面的所有3的倍数的元素（可以写表达式）
+
+	li:nth-of-type(n)	// 选择li中下标为n 元素（从1开始）
+	
+	nth-of-type(n) 和  nth-child(n) 区别：
+		开始计算位置不同
+
+4. css3变形属性
+
+	transform 代表变形
+		scale 缩放（X轴缩放、Y轴缩放  比例）
+	transition 变化时间
+		all 代表所有属性
+		1s 执行时间
+		ease 变化函数（先快后慢）
+		0.1s 代表0.1 秒之后执行
+		动画变化规则    要变化的属性（width、height、all）名称     动画时间     动画的变化规则     开始执行的时间
+
+	transform: rotate(360deg) 旋转角度（顺时针旋转）
+
+	transform: skew(45deg,30deg);	斜切
+					 X轴		Y轴
+	transform: skewX(45deg) skewY(30deg);
+
+	transform: scale(0.2) rotate(180deg);
+
+	transform: none;  变形清空
+
+	transform-origin: 50% 50%;	旋转中心（默认为50% 和 50%）；
+	transform-origin: left top;		变形的中心点
+	transform-origin: right bottom;
+
+
+5. 3d 旋转
+	
+	perspective 眼睛距离盒子之间的距离，相当于Z轴
+
+6.	backface-visibility：hidden; 	设置背面不显示		
+
+7.	transform: translate(npx npx);	移动位置
+	transform: translateX
+	transform: translateY
+	transform: translateZ
+
+8. transform-style: preserve-3d;
+

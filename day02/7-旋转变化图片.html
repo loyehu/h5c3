@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.back{
+				width: 258px;
+				height: 258px;
+				border: 1px solid palevioletred;
+				position: relative;
+				perspective: 1200px;
+			}
+			.back img:first-child{
+				position: absolute;
+				left: 0;
+				top: 0;
+				/*设置背面不显示*/
+				backface-visibility: hidden;
+				transform: rotateY(0deg);
+				transition: all 2s ease 0s;
+			}
+			.back img:last-child{
+				/*设置背面不显示*/
+				backface-visibility: hidden;
+				transform: rotateY(-180deg);
+				transition: all 2s ease 0s;
+			}
+			.back:hover img:first-child{
+				transform: rotateY(180deg);
+			}
+			.back:hover img:last-child{
+				transform: rotateY(0deg);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="back">
+			<img src="img/baby.png"/>
+			<img src="img/xiaoming.png"/>
+		</div>
+	</body>
+</html>

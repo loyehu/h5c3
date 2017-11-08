@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			
+			.view{
+				width: 560px;
+				height: 300px;
+				border: 1px solid palevioletred;
+				perspective: 1200px; 
+				margin: 150px auto;
+				transition: all 3s ease 0s;
+				background-color: plum;
+			}
+			.view img{
+				/*transform: rotateY(60deg);*/
+				transition: all 3s ease 0s;
+				border: 1px solid palevioletred;
+			}
+			.view:hover img{
+				transform: rotateY(180deg) scale(0.3,0.3);
+			}
+			.view:hover{
+				background-color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="view">
+			<img src="img/amaoagou/4.jpg">
+			
+		</div>
+	</body>
+</html>
