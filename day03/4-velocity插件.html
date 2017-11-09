@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width: 200px;
+				height: 200px;
+				border: 1px solid #000000;
+				perspective: 1000px;
+			}
+			img{
+				border: 1px solid #000000;
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		<input type="button" value="点我" />
+		
+		<div>
+			<img src="img/mu.jpg" />
+		</div>
+		<script type="text/javascript" src="js/jquery-3.2.1.js" ></script>
+		<script type="text/javascript" src="js/velocity.min.js" ></script>
+		<script type="text/javascript">
+			$("input").click(function(){
+				$("img").velocity({
+					
+					"rotateZ": "60deg"
+				},2000,function(){
+					
+					$("img").fadeOut(1000);
+				});
+				
+			});
+		</script>
+	</body>
+</html>

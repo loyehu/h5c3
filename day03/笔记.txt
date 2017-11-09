@@ -1,0 +1,46 @@
+1. Math.sin 数学公式，其实就是一个函数，要求传递 的数值，用PI 表示
+	Math.PI ==> π
+	180 ==> PI	90 ==> PI/2		360 ==> PI*2
+	
+	sin cos 用弧度来表示
+		180		Math.PI
+		a		Math.PI*a/180
+	
+2. setTimeout(function(){},1);
+	延时函数，让动画隔一段时间执行
+	
+3. 动画  animation: 动画名   执行 时间   线性（linear）;
+
+	animation: 属性完整调用一共有7个参数
+	
+
+	定义动画	@-webkit-keyframes	动画名字{
+				from{
+					开始动画;
+				}
+				to{
+					结束动画;
+				}
+			}	
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

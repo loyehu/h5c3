@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			div{
+				width: 50px;
+				height: 50px;
+				background-color: palevioletred;
+				position: absolute;
+				left: 300px;
+				top: 300px;
+				border-radius: 50%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<div></div>
+	</body>
+	<script>
+		
+		// 定义一个函数： 计算弧度
+		function radian(degree){
+			return	Math.PI * degree / 180;
+		}
+		var oBox = document.getElementById("box");
+		var r = 50;		// 定义半径
+		var d = 0;		// 定义角度
+		setInterval(function(){
+			// 计算园移动点的坐标     +300 偏移位置（即设置的初始的left和top值）
+			var x = r * Math.cos(radian(d)) + 300;
+			var y = r * Math.sin(radian(d)) + 300;
+			
+			oBox.style.left = x + "px";
+			oBox.style.top = y + "px";
+			
+			d += 5;
+		},200);
+	</script>
+</html>
