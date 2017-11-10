@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.box div{
+				width: 300px;
+				height: 300px;
+				border: 1px solid palevioletred;
+				display: none;
+			}
+			.current{
+				background-color: slateblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<input type="button" class="current" value="看书" />
+			<input type="button" value="吃饭" />
+			<input type="button" value="睡觉" />
+			<div style="display: block">看书看书看书看书</div>
+			<div>吃饭吃饭吃饭吃饭</div>
+			<div>睡觉睡觉睡觉睡觉</div>
+		</div>
+		<script type="text/javascript">
+		
+			// 获取元素
+			var oDiv = document.getElementsByClassName("box")[0];
+			var aInput = oDiv.getElementsByTagName("input");
+			var aDiv = oDiv.getElementsByTagName("div");
+			// 循环遍历input
+			for (var i = 0; i < aInput.length; i++) {
+				// 保存下标
+				aInput[i].index = i;
+				// 绑定点击事件监听
+				aInput[i].onclick = function(){
+					// 排他  对应
+					for(var j = 0; j < aInput.length; j++){
+						// 先清除所有样式
+						aInput[j].className = "";
+						aDiv[j].style.display = "none";
+					}
+					// 显示当前样式
+					this.className = "current";
+					aDiv[this.index].style.display = "block";
+				}
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

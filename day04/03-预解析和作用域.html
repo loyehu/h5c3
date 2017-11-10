@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			
+			// 案例1
+			var a = 1;	// 定义一个全局变量
+			function func(){
+				// 局部变量预解析，值并未得到，所以结果是undefined
+				alert(a);	
+				// 定义一个局部变量，
+				var a = 2;
+			}
+			func();		// undefined
+			// 函数内部定义a 的值为2，不能再外面调用，所以弹出的是全局变量a 的值
+			alert(a);	// 1
+			
+			
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

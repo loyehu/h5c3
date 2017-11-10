@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.box{
+				width: 800px;
+				height: 50px;
+				font-size: 80px;
+				margin: 50px auto;
+			}
+			.box img{
+				height: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<img src="img/0.png" alt="" />
+			<img src="img/0.png" alt="" />
+			:
+			<img src="img/0.png" alt="" />
+			<img src="img/0.png" alt="" />
+			:
+			<img src="img/0.png" alt="" />
+			<img src="img/0.png" alt="" />
+		</div>
+		<script>
+			var oDiv = document.getElementsByClassName("box")[0];
+			var aImg = oDiv.getElementsByTagName("img");
+			
+			function tick(){
+				
+				var oDate = new Date();
+			
+				var str = change(oDate.getHours()) + change(oDate.getMinutes()) + change(oDate.getSeconds());
+//				console.log(str);
+				
+				for(var i = 0; i < aImg.length; i++){
+					
+					aImg[i].src = "img/" + str[i] + ".png";
+					
+				}
+			}
+			// 先调用一次函数，每次刷新页面时，显示的时间为当前时间
+			tick();
+			setInterval(tick,1000);
+			
+			
+			function change(num){
+				
+//				console.log(num);
+				if(num < 10){
+					return "0" + num;
+				}
+				else{
+					return "" + num;
+				}
+			}
+			
+//			console.log(typeof change(oDate.getHours()))
+			
+			
+			
+		</script>
+	</body>
+</html>

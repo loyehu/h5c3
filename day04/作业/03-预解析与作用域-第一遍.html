@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/*
+			*	作用域
+			*	 	域：空间，范围，区域。。
+			*	 	作用：读 、写
+			*	 	
+			*	script 全局变量 全局函数
+			*	 	自上而下执行
+			*	 
+			*		 由内而外
+			*	
+			*	浏览器
+			*	 "js解析器"
+			*	 	
+			*	预解析：
+			*	 	1.找一些关键字 var function
+			*	 	2.逐行执行代码
+			*	 
+			*	 函数
+			*	 	函数内部也是域
+			*	 	也会进行预解析的流程
+			*	 
+			*	仓库：
+			*	 	如果是变量 则会在仓库里 存储 a = 未定义
+			*	 	
+			*	 	如果是函数 则会在仓库里 存储 a = function a(){
+			*									console.log(a);
+			*								}
+			*								这个函数块
+			*		如果函数和变量 遇到重名的 ，只留一个 只留下函数
+			*/
+			
+			// 案例1:
+			
+			/*alert(a);	// function a(){ console.log(4) }	预解析，保留函数，执行顺序从上至下，所以为最后一个函数
+			
+			var a = 1;
+			
+			alert(a);	// 1
+			
+			function a(){ console.log(a) }
+			
+			alert(a);	// 1	函数为调用，不执行
+			
+			var a = 2;
+			
+			alert(a);	// 2
+			
+			function a(){ console.log(4) }
+			*/
+			
+			
+			// 案例2：
+			
+			/*var a = 1;
+			function func(){
+				// 因为函数里面有定义a,所以直接找的是函数内部的变量，值不能提前，所以未定义
+				alert(a);
+				var a = 2;
+			}
+			func();		// undefined	
+			alert(a);	// 1
+			*/
+			
+			// 案例3：
+			
+			/*var a = 1;
+			function func(){
+				
+				alert(a);
+			 	a = 2;	
+			}
+			func();		// 1	函数内部未定义，找函数外面的全局变量
+			alert(a);	// 2	函数内部更改了全局变量的值
+			*/
+			
+			// 案例4：
+			var a = 1;
+			function func(a){	// 参数的本质上相当于一个局部变量 	相当于定义了一个变量 var a;
+				alert(a);
+				a = 2;	// 改变了局部变量的值，对全局变量没有影响
+			}
+			func(a);	// 1
+			alert(a);	// 1
+			
+			
+		</script>
+	</body>
+</html>

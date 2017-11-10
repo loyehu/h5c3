@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 192px;
+				height: 77px;
+				background: url(img/jian.png)no-repeat;
+				background-position: 0px -293px;
+				position: absolute;
+				left: 0px;
+				top: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--<div></div>-->
+		<script>
+			/*小女孩的属性
+				DOM  div小女孩DOM
+				left  位置
+				top   
+				
+				timer   定时器
+				speed   速度
+				step    步子
+				
+				方法（生命周期和普通方法）
+				
+				init 
+				
+				行走
+				die 
+			*/
+			function Girl(left,top,speed){
+				this.left = left;
+				this.top = top;
+				this.speed = speed;
+				this.timer = null;
+				this.step = 0;
+				this.dom = null;	
+				// 调用初始化
+				this.init();
+				// 直接调用行走方法
+				this.walk();
+			}
+			
+			// 定义一个初始化方法
+			Girl.prototype.init = function(){
+				// 创建DOM
+				this.dom = document.createElement("div");
+				// 添加页面
+				document.body.appendChild(this.dom);
+				// 设置样式
+				this.dom.style.left = this.left + "px";
+				this.dom.style.top = this.top + "px";
+			}
+			
+			Girl.prototype.walk = function(){
+				// 保存this
+				var self = this;
+				this.timer = setInterval(function(){
+					
+					self.step++;
+					self.left++;
+					if(self.step > 4){
+						self.step = 0;
+					}
+					if(self.left > 1000){
+						// 当小女孩到达指定位置。调用die方法
+						self.die();
+					}
+					// 赋值
+					self.dom.style.left = self.left + "px";
+					self.dom.style.backgroundPosition = self.step * -192 + "px -293px"
+					
+				},this.speed);	
+			}
+			
+			// 定义一个生命周期方法
+			Girl.prototype.die = function(){
+				
+				clearInterval(this.timer);
+				
+				document.body.removeChild(this.dom);
+			}
+			// 每个1000毫秒创建出一个小女孩
+			setInterval(function(){
+				
+				new Girl(Math.random()* 400,Math.random()* 500,Math.random()* 500);
+				
+			},1000);			
+			
+		</script>
+	</body>
+</html>
+

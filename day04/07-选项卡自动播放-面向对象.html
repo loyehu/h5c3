@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.oDiv div{
+				width: 200px;
+				height: 200px;
+				border: 1px solid plum;
+				text-align: center;
+				line-height: 200px;
+				display: none;
+			}
+			.oDiv .current{
+				background-color: deepskyblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="oDiv" id="oDiv1">
+			<input type="button" class="current" name="" id="" value="汽车" />
+			<input type="button" name="" id="" value="火车" />
+			<input type="button" name="" id="" value="飞机" />
+			<div style="display: block">汽车汽车汽车汽车</div>
+			<div>火车火车火车火车</div>
+			<div>飞机飞机飞机飞机</div>
+		</div>
+		<div class="oDiv" id="oDiv2">
+			<input type="button" class="current" name="" id="" value="王者" />
+			<input type="button" name="" id="" value="英雄" />
+			<input type="button" name="" id="" value="吃鸡" />
+			<div style="display: block">王者王者王者王者</div>
+			<div>英雄英雄英雄英雄</div>
+			<div>吃鸡吃鸡吃鸡吃鸡</div>
+		</div>
+		<script>
+			
+			function Tab(Id){
+				// 构造函数对象的属性
+				this.oDiv = document.getElementById(Id);
+				this.aInput = this.oDiv.getElementsByTagName("input");
+				this.aDiv = this.oDiv.getElementsByTagName("div");
+				this.init();
+				// 信号量
+				this.idx = 0;
+			}
+			
+			// 构造函数方法 初始化，在原型对象中写（继承时不会改变原内容）
+			Tab.prototype.init = function(){
+				// 保存this指向对象
+				var self = this;
+				for(var i = 0; i < this.aInput.length; i++){
+					// 先编号
+					this.aInput[i].index = i;
+					// 添加点击事件监听
+					this.aInput[i].onclick = function(){
+						// 这里的this指的是input
+						self.func(this);	
+					}
+					
+				}	
+			}
+			
+			// 构造函数方法 排他对应
+			Tab.prototype.func = function(obj){
+				for(var j = 0; j < this.aInput.length; j++){
+					this.aInput[j].className = "";
+					this.aDiv[j].style.display = "none";
+				}
+				obj.className = "current";
+				this.aDiv[obj.index].style.display = "block";
+			}
+			
+			// 方法：自动播放
+			Tab.prototype.autoplay = function(n){
+				// 保存this值
+				var Self = this;
+				setInterval(function(){
+					
+					if(Self.idx >= Self.aInput.length - 1){
+//						console.log(Self.aInput.length)
+						Self.idx = 0;
+					}
+					else{
+//						console.log(Self.idx)
+						Self.idx++;
+					}
+					
+					for(var j = 0; j < Self.aInput.length; j++){
+						Self.aInput[j].className = "";
+						Self.aDiv[j].style.display = "none";
+					}
+					Self.aInput[Self.idx].className = "current";
+					Self.aDiv[Self.idx].style.display = "block";
+				},n)
+				
+				
+			}
+			var tab = new Tab("oDiv1");
+			tab.autoplay(1000);
+			
+			var tab1 = new Tab("oDiv2");
+			tab1.autoplay(2000);
+			
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.oDiv div{
+				width: 200px;
+				height: 200px;
+				border: 1px solid plum;
+				text-align: center;
+				line-height: 200px;
+				display: none;
+			}
+			.oDiv .current{
+				background-color: deepskyblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="oDiv">
+			<input type="button" class="current" name="" id="" value="汽车" />
+			<input type="button" name="" id="" value="火车" />
+			<input type="button" name="" id="" value="飞机" />
+			<div style="display: block">汽车汽车汽车汽车</div>
+			<div>火车火车火车火车</div>
+			<div>飞机飞机飞机飞机</div>
+		</div>
+		<script>
+			
+			var oDiv = document.getElementsByClassName("oDiv")[0];
+			var aInput = oDiv.getElementsByTagName("input");
+			var aDiv = oDiv.getElementsByTagName("div");
+			
+			for (var i = 0; i < aInput.length; i++) {
+				// 先编号
+				aInput[i].index = i;
+				// 事件监听
+				aInput[i].onclick = function(){
+					// 排他	对应
+					for(var j = 0; j < aInput.length;j++){
+						aInput[j].className = "";
+						aDiv[j].style.display = "none";
+					}
+					this.className = "current";
+					aDiv[this.index].style.display = "block";
+				}
+			}
+		</script>
+	</body>
+</html>

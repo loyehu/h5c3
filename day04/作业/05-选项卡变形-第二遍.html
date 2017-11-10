@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.box div{
+				width: 200px;
+				height: 200px;
+				border: 2px solid orangered;
+				display: none;
+			}
+			.current{
+				background-color: slateblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<input type="button" class="current" value="柯南" />
+			<input type="button" value="诗诗" />
+			<input type="button" value="咩咩" />
+			<div style="display: block">
+				<img src="../img/nan.jpg"/>
+			</div>
+			<div>
+				<img src="../img/liu.jpg"/>
+			</div>
+			<div>
+				<img src="../img/mie.jpg"/>
+			</div>
+		</div>
+		<script type="text/javascript">
+			
+			var oDiv = null;
+			var aInput = null;
+			var aDiv = null;
+			
+			oDiv = document.getElementsByClassName("box")[0];
+			aInput = oDiv.getElementsByTagName("input");
+			aDiv = oDiv.getElementsByTagName("div");
+			// 定义一个初始化函数
+			function init(){
+				for(var i = 0; i < aInput.length; i++){
+					aInput[i].index = i;
+					aInput[i].onclick = func;
+				}
+			}
+			// 定义一个函数 排他、对应
+			function func(){
+				for (var j = 0; j < aInput.length; j++) {
+					aInput[j].className = "";
+					aDiv[j].style.display = "none";
+				}
+//				console.log(this);
+				this.className = "current";
+				aDiv[this.index].style.display = "block";
+			}
+			init();
+		</script>
+	</body>
+</html>
+

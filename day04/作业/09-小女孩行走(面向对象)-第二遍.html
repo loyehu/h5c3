@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 79px;
+				height: 108px;
+				background:red  url(../img/girl.png) no-repeat;
+				background-position: -522px -108px;
+				position: absolute;
+				top: 100px;
+				right: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id=""></div>
+		<script type="text/javascript">
+			
+			function Girl(right,top,speed){
+				
+				this.dom = null;
+				this.right = right;
+				this.top = top;
+				this.timer = null;
+				this.speed = speed;
+				this.step = 0;
+				
+				this.init();
+				
+				this.run();
+				
+			}
+			
+			Girl.prototype.init = function(){
+				
+				this.dom = document.createElement("div");
+				
+				document.body.appendChild(this.dom);
+				
+				this.dom.style.right = this.right + "px";
+				this.dom.style.top = this.top + "px";
+			}
+			
+			Girl.prototype.run = function(){
+				
+				var self = this;
+				console.log("la")
+				
+				this.timer = setInterval(function(){
+					
+					self.right += 3;
+					self.step++;
+					
+					if(self.step > 7){
+						self.step = 0;
+					}
+					
+					if(self.right > 1200){
+						self.die();
+					}
+					
+					self.dom.style.right = this.right + "px";
+					self.dom.style.backgroundPosition = this.step * -79 + "px -108px";
+					
+					
+					
+				},this.speed);
+				
+				
+				
+				
+			}
+			
+			Girl.prototype.die = function(){
+				
+				document.body.removeChild(this.dom);
+				
+				clearInterval(this.timer);
+			
+			}
+			
+			new Girl(Math.random() * 400 , Math.random() * 400 , Math.random() * 400);
+//			var count = 0;
+//			var timer = setInterval(function(){
+//				
+//				if(count > 6){
+//					count = 0;
+//					clearInterval(timer);
+//				}
+//				
+//				new Girl(Math.random() * 400 , Math.random() * 400 , Math.random() * 400);
+//				
+//			},1000);
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>
