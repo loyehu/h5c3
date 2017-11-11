@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				border: 1px solid plum;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="800" height="800">
+			请升级浏览器，当前不支持canvas！！！
+		</canvas>
+		<script type="text/javascript">
+		
+			// 得到画布
+			var canvas = document.getElementById("canvas");
+			
+			// 得到上下文
+			var ctx = canvas.getContext("2d");
+			// 设置颜色
+			ctx.fillStyle = "plum";
+			// 画矩形
+			ctx.fillRect(100,100,100,100);
+			
+			// 设置笔触颜色
+			ctx.strokeStyle = "darkorange";
+			// 画一个矩形笔触未填充
+			ctx.strokeRect(300,100,100,100);
+			
+			// 开始绘制
+			ctx.beginPath();
+			ctx.moveTo(500,100);	// 起点
+			ctx.lineTo(600,100);	// 第二个点
+			ctx.lineTo(600,200);	// 第三个点
+			ctx.lineTo(500,200);	// 第四个点
+			ctx.closePath();	// 闭合路径
+				
+			ctx.stroke();
+			
+			ctx.fill();
+			
+			
+		</script>
+	</body>
+</html>

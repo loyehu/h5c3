@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				border: 1px solid #000;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="800" height="800">
+			请升级浏览器，当前不支持canvas！！！
+		</canvas>
+		<script type="text/javascript">
+			
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			
+			ctx.fillStyle = "blueviolet";
+			ctx.strokeStyle = "brown";
+			ctx.lineWidth = "4";
+			ctx.beginPath();
+			ctx.moveTo(300,300);
+			
+//			ctx.arc(300,300,100,-0.5*Math.PI,1*Math.PI,false);
+//			ctx.closePath();
+//			ctx.fill();
+//			ctx.stroke();
+			
+			function draw(current){
+				
+				ctx.arc(300,300,100,-0.5*Math.PI,current*2*Math.PI - Math.PI / 2,false);
+				ctx.closePath();
+				ctx.fill();
+//				ctx.stroke();
+				
+				
+				
+			}
+			
+//			draw(0.6)
+			// 定义信号量
+			var num = 0;
+			// t 传递的当前值
+			function loadCanvas(t){
+				
+				//通过定时器实现动画效果，信号量累加 赋值
+				var timer = setInterval(function(){
+					
+					if(num > t){
+						draw(t);
+						clearInterval(timer);
+					}
+					else{
+						draw(num);
+						num += 0.005;
+					}
+				},100);
+				
+			}
+			
+			loadCanvas(0.8);
+		</script>
+	</body>
+</html>

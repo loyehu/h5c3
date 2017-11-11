@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				border: 1px solid mediumpurple;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="600" height="600">
+			请升级浏览器，当前不支持canvas！！！
+		</canvas>
+		<script type="text/javascript">
+			
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			
+			// 创建一个图片对象
+			var image = new Image();
+			// 设置图片路径
+			image.src = "../img/liu.jpg";
+			
+			// 图片加载完成之后执行
+			image.onload = function(){
+				
+//				ctx.drawImage(图片,图片x坐标,图片y坐标,图片宽,图片高,画布x,画布y,宽,高)
+				ctx.drawImage(image,60,20,100,100,100,100,300,300);
+				
+			}
+			
+		</script>
+	</body>
+</html>

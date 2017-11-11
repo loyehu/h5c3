@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				border: 1px solid palevioletred;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="800" height="800">
+			请升级浏览器，当前不支持canvas
+		</canvas>
+		<script type="text/javascript">
+			
+			var canvas = document.getElementById("canvas");
+			
+			var ctx = canvas.getContext("2d");
+			// 颜色填充放在文字之前
+			ctx.fillStyle = "peru";
+			
+			ctx.fill();
+			
+
+			ctx.font = "40px 宋体";
+			ctx.fillText("落叶",200,200);
+			
+			
+		</script>
+	</body>
+</html>

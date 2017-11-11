@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				border: 1px solid #000;
+				background: palevioletred;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="800" height="800">
+			请升级浏览器，当前不支持canvas！！！
+		</canvas>
+		<script type="text/javascript">
+			
+			var canvas = document.getElementById("canvas");
+			
+			var ctx = canvas.getContext("2d");
+			
+			// 右边白色半圆
+			ctx.fillStyle = "#fff";
+			ctx.beginPath();
+			ctx.arc(300,400,200,-0.5 * Math.PI,0.5 * Math.PI,false);
+			ctx.closePath();
+			ctx.fill();
+			
+			// 左边黑色半圆
+			ctx.fillStyle = "#000";
+			ctx.beginPath();
+			ctx.arc(300,400,200,-0.5 * Math.PI,0.5 * Math.PI,true);
+			ctx.closePath();
+			ctx.fill();
+			
+			// 上边白色圆
+			ctx.fillStyle = "#fff";
+			ctx.beginPath();
+			ctx.arc(300,300,100,0,2 * Math.PI,false);
+			ctx.closePath();
+			ctx.fill();
+			
+			// 下边黑色圆
+			ctx.fillStyle = "#000";
+			ctx.beginPath();
+			ctx.arc(300,500,100,0,2 * Math.PI,false);
+			ctx.closePath();
+			ctx.fill();
+			
+			// 上边黑色小圆
+			ctx.fillStyle = "#000";
+			ctx.beginPath();
+			ctx.arc(300,300,30,0,2 * Math.PI,false);
+			ctx.closePath();
+			ctx.fill();
+			
+			// 下边白色圆
+			ctx.fillStyle = "#fff";
+			ctx.beginPath();
+			ctx.arc(300,500,30,0,2 * Math.PI,false);
+			ctx.closePath();
+			ctx.fill();
+			
+			
+			
+		</script>
+	</body>
+</html>

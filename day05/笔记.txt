@@ -1,0 +1,56 @@
+
+
+1. canvas 画圆
+
+			圆心坐标 60,60 	半径	60	起始角 0	结束角	2PI	顺时针画弧度false	逆时针画弧true
+	ctx.arc(60,60,60,0,2*Math.PI,false);	
+	ctx.arc(x轴,Y轴,半径,起始角,结束角,正负时针方向);	
+	
+	ctx.stroke();	// 绘制路径
+
+	ctx.closePath();	// 闭合路径
+
+2. 绘制文本：	
+	ctx.font = "40px 宋体"；
+	ctx.fillText("文本内容",X轴,Y轴);
+	ctx.fillText("hello",200,100);
+
+3. 绘制图片：
+	（1）	创建图片对象
+		var image = new Image();
+	（2） 	图片的src属性
+		image.src = "图片路径";
+		
+	（3）	图片加载完成
+		image.onload = function(){
+			ctx.drawImage(image,10,70,400,400,100,100,200,200);
+			// ctx.drawImage(图片，图片的X坐标，图片的Y坐标,图片的宽度,图片的高,画布的X，画布的Y,宽，高);
+			// 图片的X坐标，图片的Y坐标      在图片上坐标为 10,70的位置开始截取
+			// 图片的宽度,图片的高	截取为400,400大小的范围
+			// 
+		
+		}	
+
+	ctx.clearRect(0,0,800,800);		// 清除画布
+
+	ctx.save();		// 保存画布当前状态
+	ctx.restore();	// 读取之前存储的画布状态
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

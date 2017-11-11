@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				border: 1px solid #000;
+				background: plum;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="600" height="600">
+			请升级浏览器，当前不支持canvas！！！
+		</canvas>
+		<script type="text/javascript">
+			
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			
+			function drawClock(){
+				
+				// 清除画布
+				ctx.clearRect(0,0,600,600);
+				
+				// 获取时间
+				var oDate = new Date();				
+				var oHour = oDate.getHours();	// 小时
+				var oMinute	= oDate.getMinutes();	// 分钟
+				var oSecond = oDate.getSeconds();	// 秒
+				
+				// 小时必须获取浮点类型，产生偏移（小时+分钟比）		
+				oHour += oMinute / 60;
+				
+				// 将24小时制转换为12小时制
+				oHour = oHour > 12 ? oHour - 12 : oHour;
+				
+				// 绘制表盘
+				ctx.beginPath();
+				ctx.lineWidth = "3";	// 设置笔触宽度
+				ctx.strokeStyle = "blueviolet";		// 笔触颜色
+				ctx.lineWidth = "4";
+				ctx.arc(300,300,200,0,360,false);
+				ctx.closePath();			
+				ctx.stroke();
+				
+				// 时针刻度
+				for(var i = 0; i < 12; i++){
+					// 保存画布当前状态
+					ctx.save();
+					
+					// 设置时针刻度样式
+					ctx.lineWidth = "7";
+					ctx.strokeStyle = "blueviolet";
+					
+					// 设置异次空间原点
+					ctx.translate(300,300);		// 旋转角度的原点
+					// 设置旋转角度
+					ctx.rotate( i * 30 * Math.PI / 180 );	// 当前角度乘以（圆周/180）
+					
+					// 绘制路径
+					ctx.beginPath();
+					ctx.moveTo(0,-170);		// 画线，从坐标0，-170
+					ctx.lineTo(0,-190);		// 到坐标0，-190
+					
+					ctx.stroke();
+					ctx.closePath();
+					
+					// 读取之前存储的画布状态
+					ctx.restore();
+					
+				}
+				
+				// 分针时刻
+				for(var i = 0; i < 60; i++){
+					// 保存当前画布状态
+					ctx.save();
+					
+					// 设置分针刻度样式
+					ctx.strokeStyle = "blueviolet";
+					ctx.lineWidth = "5";
+					
+					// 旋转原点原点
+					ctx.translate(300,300);
+					
+					// 旋转角度
+					ctx.rotate(i * 6 * Math.PI / 180);
+					
+					ctx.beginPath();
+					ctx.moveTo(0,-180);
+					ctx.lineTo(0,-190);
+					ctx.closePath();
+					ctx.stroke();
+					
+					// 读取之前存储的状态
+					ctx.restore();
+				}
+				
+				// 时针
+				ctx.save();		// 保存当前画布状态
+				
+				// 设置分针刻度样式
+				ctx.strokeStyle = "blueviolet";
+				ctx.lineWidth = "7";
+				
+				// 旋转原点原点
+				ctx.translate(300,300);
+				
+				// 旋转角度
+				ctx.rotate(oHour * 30 * Math.PI / 180);
+				
+				ctx.beginPath();
+				ctx.moveTo(0,10);
+				ctx.lineTo(0,-130);
+				ctx.closePath();
+				ctx.stroke();
+				
+				// 读取之前存储的状态
+				ctx.restore();
+				
+				// 分针
+				ctx.save();		// 保存当前画布状态
+				
+				// 设置分针刻度样式
+				ctx.strokeStyle = "blueviolet";
+				ctx.lineWidth = "6";
+				
+				// 旋转原点原点
+				ctx.translate(300,300);
+				
+				// 旋转角度
+				ctx.rotate(oMinute * 6 * Math.PI / 180);
+				
+				ctx.beginPath();
+				ctx.moveTo(0,15);
+				ctx.lineTo(0,-160);
+				ctx.closePath();
+				ctx.stroke();
+				
+				// 读取之前存储的状态
+				ctx.restore();
+				
+				// 秒针
+				ctx.save();		// 保存当前画布状态
+				
+				// 设置分针刻度样式
+				ctx.strokeStyle = "blueviolet";
+				ctx.lineWidth = "5";
+				
+				// 旋转原点原点
+				ctx.translate(300,300);
+				
+				// 旋转角度
+				ctx.rotate(oSecond * 6 * Math.PI / 180);
+				
+				ctx.beginPath();
+				ctx.moveTo(0,20);
+				ctx.lineTo(0,-190);
+				ctx.closePath();
+				ctx.stroke();
+				
+				// 读取之前存储的状态
+				ctx.restore();
+				
+			}
+			
+			drawClock();
+			
+			setInterval(drawClock , 1000);
+			
+		</script>
+	</body>
+</html>

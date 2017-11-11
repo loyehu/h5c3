@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				border: 1px solid palevioletred;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="800" height="800">
+			您的浏览器暂不支持canvas，请更新浏览器！！！
+		</canvas>
+		<script type="text/javascript">
+			
+			var canvas = document.getElementById("canvas");
+			
+			var ctx = canvas.getContext("2d");
+			
+			// 设置文本大小，和字体
+			ctx.font = "100px 宋体";
+			// 文本显示内容 和  显示位置
+			ctx.fillText("I'M Faded",200,200);
+			
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				border: 1px solid palevioletred;
+				background: plum;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500">
+			请升级浏览器，当前不支持canvas！！！
+		</canvas>
+		<script type="text/javascript">
+			// 得到画布
+			var canvas = document.getElementById("canvas");
+			// 得到上下文
+			var ctx = canvas.getContext("2d");
+			 
+			// 定义一个函数，画时钟
+			function drawClock(){
+				
+				// 清除画布 
+				ctx.clearRect(0,0,500,500);
+				// 获取时间
+				var oDate = new Date();
+				var hour = oDate.getHours();	// 获取时间
+				var minute = oDate.getMinutes();	// 获取分钟
+				var second = oDate.getSeconds();	// 获取秒数
+				
+				//小时必须获取浮点类型，产生偏移（小时+分钟比）
+				hour = hour + minute / 60;
+				//讲24小时转换为12小时制
+				hour = hour > 12 ? hour - 12 : hour;
+				
+				// 绘制表盘
+				ctx.beginPath();    // 开始绘制
+				ctx.strokeStyle = "blueviolet";	//笔触颜色
+				ctx.lineWidth = 5;	// 设置笔触宽度
+				ctx.arc(250,250,200,0,360,false);   // 绘制图形，坐标250，250，半径200，整圆（0-360），false表示顺时针
+				ctx.stroke();	// 绘制笔触
+				ctx.closePath();      // 结束绘制
+				
+				// 刻度绘制
+				// 1. 绘制时针刻度
+				for(var i = 0; i < 12; i++){
+					// 保存当前画布状态
+					ctx.save();
+					
+					// 设置时针刻度样式
+					ctx.lineWidth = "7";
+					ctx.strokeStyle = "blueviolet";
+					
+					// 设置异次元空间圆点
+					ctx.translate(250,250);    // 旋转角度的原点
+					// 设置旋转的角度
+					ctx.rotate(i * 30 * Math.PI / 180);    // 当前角度乘以圆周/180
+					
+					ctx.beginPath();    // 开始绘制路径
+					ctx.moveTo(0,-170);    //画线，从坐标0，-170
+					ctx.lineTo(0,-190);    // 到坐标0，-190
+					ctx.stroke();
+					ctx.closePath();
+					
+					ctx.restore();    //读取之前存储的画布状态
+ 				}
+				
+				// 2. 绘制分针刻度
+				for(var i = 0; i < 60; i++){
+					// 保存当前画布状态
+					ctx.save();
+					
+					// 设置时针刻度样式
+					ctx.lineWidth = "5";
+					ctx.strokeStyle = "blueviolet";
+					
+					// 设置异次元空间圆点
+					ctx.translate(250,250);    // 旋转角度的原点
+					// 设置旋转的角度
+					ctx.rotate(i * 6 * Math.PI / 180);    // 当前角度乘以圆周/180
+					
+					ctx.beginPath();    // 开始绘制路径
+					ctx.moveTo(0,-180);    //画线，从坐标0，-180
+					ctx.lineTo(0,-190);    // 到坐标0，-190
+					ctx.stroke();
+					ctx.closePath();
+					
+					ctx.restore();    //读取之前存储的画布状态
+ 				}
+				
+				// 绘制时针
+				ctx.save();   // 保存当前画布状态
+				
+				// 设置时针样式
+				ctx.lineWidth = "7";
+				ctx.strokeStyle = "blueviolet";
+				
+				// 设置异次元空间圆点
+				ctx.translate(250,250);    // 旋转角度的原点
+				// 设置旋转的角度
+				ctx.rotate(hour * 30 * Math.PI / 180);    // 当前角度乘以圆周/180
+				
+				ctx.beginPath();    // 开始绘制路径
+				ctx.moveTo(0,10);    //画线，从坐标0，10
+				ctx.lineTo(0,-120);    // 到坐标0，-120
+				ctx.stroke();
+				ctx.closePath();
+				
+				ctx.restore();    //读取之前存储的画布状态
+				
+				
+				// 绘制分针
+				ctx.save();   // 保存当前画布状态
+				
+				// 设置时针样式
+				ctx.lineWidth = "5";
+				ctx.strokeStyle = "blueviolet";
+				
+				// 设置异次元空间圆点
+				ctx.translate(250,250);    // 旋转角度的原点
+				// 设置旋转的角度
+				ctx.rotate(minute * 6 * Math.PI / 180);    // 当前角度乘以圆周/180
+				
+				ctx.beginPath();    // 开始绘制路径
+				ctx.moveTo(0,15);    //画线，从坐标0，10
+				ctx.lineTo(0,-160);    // 到坐标0，-160
+				ctx.stroke();
+				ctx.closePath();
+				
+				ctx.restore();    //读取之前存储的画布状态
+				
+				// 绘制秒针
+				ctx.save();   // 保存当前画布状态
+				
+				// 设置时针样式
+				ctx.lineWidth = "3";
+				ctx.strokeStyle = "blueviolet";
+				
+				// 设置异次元空间圆点
+				ctx.translate(250,250);    // 旋转角度的原点
+				// 设置旋转的角度
+				ctx.rotate(second * 6 * Math.PI / 180);    // 当前角度乘以圆周/180
+				
+				ctx.beginPath();    // 开始绘制路径
+				ctx.moveTo(0,20);    //画线，从坐标0，10
+				ctx.lineTo(0,-180);    // 到坐标0，-180
+				ctx.stroke();
+				ctx.closePath();
+				
+				ctx.restore();    //读取之前存储的画布状态	
+			}
+			drawClock();
+			
+			setInterval(drawClock,1000);
+			
+		</script>
+	</body>
+</html>
