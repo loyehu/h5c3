@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--约束视口-->
+		<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=0"/>
+	</head>
+	<body>
+		<div id="infor"></div>
+		<script type="text/javascript">
+			
+			// 得到元素
+			var infor = document.getElementById("infor");
+			
+			// 获取视口宽度
+			var viewport = document.documentElement.clientWidth;
+			
+			// 添加到页面
+			infor.innerHTML = viewport;
+			
+		</script>
+	</body>
+</html>

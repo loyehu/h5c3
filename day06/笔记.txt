@@ -1,0 +1,25 @@
+
+	li 标签的display：list-item
+		改为 display: block; 就没有默认的点了
+
+1. 页面改变事件
+	window.onresize = function(){
+	
+	}
+
+font-size: 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
