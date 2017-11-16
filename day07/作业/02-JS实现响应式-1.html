@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="CSS/index1200.css"/>
+		<link rel="stylesheet" id="link" type="text/css" href=""/>
+	</head>
+	<body>
+		<header>
+			<div class="logo"></div>
+			<nav>
+				<ul>
+					<li><a href="">网页栏目</a></li>
+					<li><a href="">网页栏目</a></li>
+					<li><a href="">网页栏目</a></li>
+					<li><a href="">网页栏目</a></li>
+					<li><a href="">网页栏目</a></li>
+					<li><a href="">网页栏目</a></li>
+					<li><a href="">网页栏目</a></li>
+					<li><a href="">网页栏目</a></li>
+					<li><a href="">网页栏目</a></li>
+					<li><a href="">网页栏目</a></li>
+				</ul>
+			</nav>
+			<div class="tools"></div>
+			<div class="btn"></div>
+		</header>
+		
+		<section>
+			<div class="con">1</div>
+			<div class="con">2</div>
+			<div class="con">3</div>
+			<div class="con">4</div>
+			<div class="con">5</div>
+			<div class="con">6</div>
+		</section>
+		
+		<script type="text/javascript" src="../js/jquery-3.2.1.js" ></script>
+		<script type="text/javascript">
+
+			var oLink = document.getElementById("link");
+			
+			
+			
+			set();
+			
+			window.onresize = set;
+			
+			function set(){
+				
+				var viewport = document.documentElement.clientWidth;
+				
+				if(viewport >= 1200){
+					oLink.href = "";
+				}
+				else if(viewport >= 980){
+					oLink.href="CSS/index980.css";
+				}
+				else if(viewport >=640){
+					oLink.href = "CSS/index640.css";
+				}
+				else{
+					oLink.href="CSS/index320.css";
+					$(".btn").click(function(){
+						
+						$("nav").stop(true).slideToggle();
+					});
+					
+				}
+			}
+			
+		</script>
+		
+	</body>
+</html>

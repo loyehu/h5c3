@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width"/>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			img{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<img id="img" src="img/liu.jpg"/>
+		<script type="text/javascript">
+			
+			// 得到图片
+			var oImg = document.getElementById("img");
+			
+			// 信号量
+			var newX = 0;
+			var newY = 0;
+			
+			// 手指距离图片左上角的误差
+			var deltaX;
+			var deltaY;
+			
+			// 触摸开始,false 监听事件冒泡
+			oImg.addEventListener("touchstart",function(event){
+				// 阻止浏览器默认事件
+				event.preventDefault();
+				
+				deltaX = event.touches[0].clientX - newX;
+				deltaY = event.touches[0].clientY - newY;
+				
+				
+				
+			},false);
+			
+			// 触摸移动
+			oImg.addEventListener("touchmove",function(event){
+				
+				// 阻止浏览器默认事件
+				event.preventDefault();
+				
+				// 移动量
+				newX = event.touches[0].clientX - deltaX;
+				newY = event.touches[0].clientY - deltaY;
+				
+				// 赋值
+				oImg.style.left = newX + "px";
+				oImg.style.top = newY + "px";
+				
+				
+				
+			},false);
+			
+			
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,71 @@
+
+/*通用样式*/
+*{
+	margin: 0;
+	padding: 0;
+}
+ul{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+
+/*页眉部分*/
+header{
+	width: 1200px;
+	height: 60px;
+	background-color: plum;
+	margin: 0 auto;
+}
+header .logo{
+	width: 120px;
+	height: 60px;
+	float: left;
+	text-align: center;
+	line-height: 60px;
+	background-color: skyblue;
+}
+header nav ul li{
+	float: left;
+	text-align: center;
+	line-height: 60px;
+	background-color: orange;
+	padding: 0 20px;
+}
+header .tools{
+	width: 120px;
+	height: 60px;
+	background-color: deeppink;
+	float: left;
+	text-align: center;
+	line-height: 60px;
+}
+
+/*主体部分*/
+section{
+	width: 1200px;
+	height: 400px;
+	background-color: plum;
+	margin: 0 auto;
+}
+section .con{
+	width: 160px;
+	height: 160px;
+	background-color: mediumpurple;
+	margin: 10px;
+	float: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

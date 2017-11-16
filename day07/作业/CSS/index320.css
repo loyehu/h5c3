@@ -1,0 +1,38 @@
+
+header{
+	width: 320px;
+	position: relative;
+}
+header .logo{
+	float: none;
+	margin: 0 auto;
+}
+header nav{
+	display: none;
+	position: absolute;
+	top: 60px;
+	left: 0;
+}
+header nav li{
+	width: 300px;
+	line-height: 40px;
+	
+}
+header .btn{
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	top: 10px;
+	right: 0;
+	background-color: papayawhip;
+}
+section{
+	width: 320px;
+	height: 800px;
+}
+
+section .con{
+	width: 100%;
+	margin: 0 0;
+	margin-top: 10px;
+}

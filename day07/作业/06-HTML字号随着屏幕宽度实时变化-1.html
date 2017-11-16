@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html{
+				font-size: 20px;
+			}
+			div{
+				width: 25%;
+				height: 6rem;
+				border: 1px solid deeppink;
+				box-sizing: border-box;
+				float: left;
+				text-align: center;
+				line-height: 6rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div>春天spring</div>
+		<div>夏天summer</div>
+		<div>秋天autumn</div>
+		<div>冬天winter</div>
+		<script type="text/javascript">
+			
+			setFontSize();
+			
+			window.onresize = setFontSize;
+			
+			function setFontSize(){
+				
+				var oViewport = document.documentElement.clientWidth;
+				
+				// 根据比例设置文字大小
+				document.documentElement.style.fontSize = 20 * ( oViewport / 800 ) + "px";
+				
+			}
+		</script>
+	</body>
+</html>

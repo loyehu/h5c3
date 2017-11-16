@@ -1,0 +1,22 @@
+
+header{
+	width: 640px;
+}
+header .logo{
+	float: none;
+	margin: 0 auto;
+}
+header nav{
+	width: 640px;
+	
+}
+nav ul li.s{
+	display: none;
+}
+header .tools{
+	display: none;
+}
+
+section{
+	width: 640px;
+}

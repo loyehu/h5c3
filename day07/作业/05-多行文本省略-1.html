@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.Text{
+				width: 200px;
+				height: 192px;
+				background-color: plum;
+				font-size: 18px;
+				/*让多行文本加上省略号*/
+				text-overflow: ellipsis;
+				/*超出部分隐藏*/
+				overflow: hidden;
+				display: -webkit-box;
+				/*从顶部向底部垂直布置子元素*/
+				-webkit-box-orient: vertical;
+				/*从上到下第八行*/
+				-webkit-line-clamp: 8;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="Text">
+			风是穿山过水拂面而来,花是零落成泥常开不败,雪是日出消融檐上落白,月是咫尺天涯千秋万载;
+			风是自息自生扰袖弄摆,花是摇乱玉彩沾衣未摘,雪是眉心微凉华发皑皑,月是移走寂空星云中埋;
+			风是清歌不歇吹彻高台,花是折枝粉黛绽诗三百,雪是积帐饰晴雕弓懒开,月是良宵清光此夜难再
+		</div>
+	</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width"/>
+	</head>
+	<body>
+		<h1 id="oTitle"></h1>
+		
+		<script type="text/javascript">
+			
+			var oTitle = document.getElementById("oTitle");
+			
+			// 开始触摸		false：监听事件冒泡	DOM 2级事件在低版本浏览器中不能执行性，所以不用判断兼容
+			document.addEventListener("touchstart",function(event){
+				
+//				console.log(event);
+				// 阻止默认事件
+				event.preventDefault();
+				
+				oTitle.innerHTML = "你正在用" + event.touches.length + "跟手指触摸屏幕";
+			
+			},false);
+			
+			// 触摸移动
+			document.addEventListener("touchmove",function(event){
+				
+				
+				// 阻止默认事件
+				event.preventDefault();
+				
+				oTitle.innerHTML = "";
+				
+				for(var i = 0; i < event.touches.length; i++){
+					
+					oTitle.innerHTML += "第" + (i+1) + "根手指信息<br/>";
+					
+					oTitle.innerHTML += event.touches[i].clientX + "px<br/>" + event.touches[0].clientY + "px";
+//					console.log(event.touches[i].clientX);
+				}
+			
+			},false);
+			
+			// 触摸结束
+			document.addEventListener("touchend",function(event){
+				
+				// 阻止默认事件
+				event.preventDefault();
+				
+				oTitle.innerHTML = "触摸结束了";
+				
+			},false);
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

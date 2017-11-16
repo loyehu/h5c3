@@ -1,0 +1,13 @@
+
+header{
+	width: 640px;
+	height: 120px;
+	overflow: hidden;
+}
+header .logo{
+	float: none;
+	margin: 0 auto;
+}
+section{
+	width: 640px;
+}

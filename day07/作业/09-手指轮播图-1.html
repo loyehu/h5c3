@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width"/>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				overflow: hidden;
+			}
+			.carousel{
+				width: 100%;
+				height: 300px;
+				overflow: hidden;
+				border-bottom: 10px solid deeppink;
+				position: relative;
+			}
+			.imageList ul{
+				list-style: none;
+			}
+			.imageList ul li{
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+			}
+			.imageList ul li img{
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="carousel" id="carousel">
+			<div class="imageList">
+				<ul>
+					<li><a href=""><img src="../img/0.jpg" alt="" /></a></li>
+					<li><a href=""><img src="../img/1.jpg" alt="" /></a></li>
+					<li><a href=""><img src="../img/2.jpg" alt="" /></a></li>
+					<li><a href=""><img src="../img/3.jpg" alt="" /></a></li>
+					<li><a href=""><img src="../img/4.jpg" alt="" /></a></li>
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript">
+			// 获取元素    轮播图里的li
+			var carousel = document.getElementById("carousel");
+			var imageLi = carousel.getElementsByClassName("imageList")[0].getElementsByTagName("li");
+			// 信号量
+			var prev = 4;	// 上一张
+			var idx = 0;	// 当前
+			var next = 1;	// 下一张
+			// 调用初始化方法
+			init();
+			// 屏幕尺寸发生改变时，调用初始化方法
+			window.onresize = init;
+			var windowWidth;
+			// 初始化函数
+			function init(){
+				// 屏幕的视口宽度
+				windowWidth = document.documentElement.clientWidth;
+				// 设置盒子的高度
+				carousel.style.height = windowWidth * (300 / 560) + "px";
+				// 设置li的默认位置
+				for(var i = 0; i < imageLi.length; i++){
+					imageLi[i].style.webkitTransform = "translateX(" + windowWidth + "px)";
+				}
+				// 去掉过渡，移动时实时跟随手指，不要有过渡效果
+				imageLi[prev].style.transition = "none";
+				imageLi[idx].style.transtion = "none";
+				imageLi[next].style.transition = "none";
+				// 新的位置
+				imageLi[prev].style.webkitTransform = "translateX(" + -windowWidth + "px)";
+				imageLi[idx].style.webkitTransform = "translateX(0px)";
+				imageLi[next].style.webkitTransform = "translateX(" + windowWidth + "px)";	
+			}
+			// 事件监听
+			carousel.addEventListener("touchstart",touchstartHandler,false);
+			carousel.addEventListener("touchmove",touchmoveHandler,false);
+			carousel.addEventListener("touchend",touchendHandler,false);
+			// 手指偏移量
+			var deltaX;
+			// 触摸开始的时候手指的位置
+			var startX;
+			// 时间戳  从1970年1月1日0：00到现在的毫秒数
+			var startTime;
+			// 定时器
+			var timer = setInterval(function(){
+				showNext();
+			},4000);
+			// 触摸开始
+			function touchstartHandler(event){
+				// 阻止默认事件
+				event.preventDefault();
+				// 清除定时器
+				clearInterval(timer);
+				// 判断手指个数,超过一根手指直接返回
+				if(event.touches.length > 1){
+					return ;
+				}
+				// 记录偏移量
+				deltaX = event.touches[0].clientX;
+				// 触摸开始的时候，手指的位置
+				startX = event.touches[0].clientX;
+				// 去掉过渡，移动时实时跟随手指，不要有过渡效果
+				imageLi[prev].style.transition = "none";
+				imageLi[idx].style.transtion = "none";
+				imageLi[next].style.transition = "none";
+				// 记录事件戳
+				startTime = new Date();
+				// 新的位置，就绪准备
+				imageLi[prev].style.webkitTransform = "translateX(" + -windowWidth + "px)";
+				imageLi[idx].style.webkitTransform = "translateX(0px)";
+				imageLi[next].style.webkitTransform = "translateX(" + windowWidth + "px)";
+			}
+			// 手指移动事件
+			function touchmoveHandler(event){
+				// 阻止默认事件
+				event.preventDefault();
+				// 清除定时器
+				clearInterval(timer);
+				// 判断手指个数
+				if(event.touches.length > 1){
+					return ;
+				}
+				// 得到当前坐标
+				var clientX = event.touches[0].clientX;
+				// 改变当前图片位置
+				imageLi[prev].style.webkitTransform = "translateX(" + (-windowWidth + clientX - deltaX) + " px)";
+				imageLi[idx].style.webkitTransform = "translateX(" + (clientX - deltaX) + " px)";
+				imageLi[next].style.webkitTransform = "translateX(" + (windowWidth + clientX - deltaX) + "px)";
+			}
+			// 触摸结束
+			function touchendHandler(event){
+				// 阻止浏览器默认事件
+				event.preventDefault();
+				// 清除定时器
+				clearInterval(timer);
+				// 决定滑动是否成功
+				var distance = event.changedTouches[0].clientX - startX;
+//				console.log(distance);
+				// 滑动时间
+				var time = new Date() - startTime;
+				// 如果你向右边滑动超过了屏幕的一半，或者你向右边活动且事件小于300毫秒，就认为滑动成功
+				if(distance >= windowWidth / 2 || distance > 30 && time < 300){
+					showPrev();
+				}
+				else if(distance >= -windowWidth / 2 || distance > -30 && time < 300){
+					showNext();
+				}
+				else{
+					//移动值不到windowWidth / 2，滑动不成功
+					console.log("滑动不成功");
+					// 加上过度
+					imageLi[prev].style.transition = "all 3s ease 0s";
+					imageLi[idx].style.transition = "all 3s ease 0s";
+					imageLi[next].transition = "all 3s ease 0s";
+					// 移动
+					imageLi[idx].style.webkitTransform = "translateX(0px)";
+					imageLi[next].style.webkitTransform = "translateX(" + windowWidth + "px)";
+					imageLi[prev].style.webkitTransform = "translateX(" + -windowWidth + "px)";
+				}
+			}
+			// 上一张图片动画函数
+			function showPrev(){
+				// 向右移动成功
+				console.log("向右移动成功！");
+				// 改变信号量
+				next = idx;
+				idx = prev;
+				// 改变prev
+				prev--;
+				if(prev < 0){
+					prev = 4;
+				}
+				// 过渡
+				imageLi[next].style.transition = "all 2.3s ease 0s";
+				imageLi[idx].style.transition = "all 2.3s ease 0s";
+				imageLi[prev].style.transition = "none";
+				// 移动
+				imageLi[idx].style.webkitTransform = "translateX(0px)";
+				imageLi[next].style.webkitTransform = "translateX(" + windowWidth + "px)";
+				imageLi[prev].style.webkitTransform = "translateX(" + -windowWidth + "px)";
+			}
+			// 下一张图片动画函数
+			function showNext(){
+				// 向左移动成功
+				console.log("向左移动成功！");
+				// 改变信号量
+				prev = idx;
+				idx = next;
+				// 改变next
+				next++;
+				// 范围
+				if(next > 4){
+					next = 0;
+				}
+				// 过渡
+				imageLi[prev].style.transition = "all 2.3s ease 0s";
+				imageLi[idx].style.transition = "all 2.3s ease 0s";
+				imageLi[next].style.transition = "none";
+				// 移动
+				imageLi[idx].style.webkitTransform = "translateX(0px)";
+				imageLi[next].style.webkitTransform = "translateX(" + windowWidth + "px)";
+				imageLi[prev].style.webkitTransform = "translateX(" + -windowWidth + "px)";
+			}
+			
+			timer = setInterval(showNext,4000);
+			
+			
+			
+		</script>
+	</body>
+</html>
