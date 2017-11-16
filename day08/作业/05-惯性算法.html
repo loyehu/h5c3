@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width" /> 
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#oDiv{
+				width: 70px;
+				height: 70px;
+				background-color: plum;
+				position: absolute;
+				left: 100px;
+				top: 100px;
+			}
+			.line{
+				width: 1px;
+				position: absolute;
+				height: 600px;
+				left: 500px;
+				background: black;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="oDiv"></div>
+		<span class="line"></span>
+		<script type="text/javascript">
+			// 获取元素
+			var oDiv = document.getElementById("oDiv");
+			// 起点的位置
+			var deltaX;
+			// 信号量
+			var newX = 100;
+			// 移动的数组
+			var moveArr = [0,0];
+			
+			// 触摸开始
+			oDiv.addEventListener("touchstart",function(event){
+				// 得到误差值
+				deltaX = event.touches[0].clientWidth -newX;
+				// 阻止浏览器默认事件
+				event.preventDefault();
+				// 去掉过渡
+				oDiv.style.transition = "none";
+			},false);
+			
+			// 触摸移动		touchmove事件并不说，你滑动了多少像素就触发几次，而是有一个固定的时间间隔
+			oDiv.addEventListener("touchmove",function(event){
+				// 阻止浏览器默认事件
+				event.preventDefault();
+				// 信号量的改变
+				newX = event.touches[0].clientX - deltaX;
+				// 赋值
+				oDiv.style.left = newX + "px";
+				// 记录手指触摸位置
+				moveArr.push(event.touches[0].clientX);
+			},false);
+			
+			// 触摸结束
+			oDiv.addEventListener("touchend",function(event){
+				// 阻止浏览器默认事件
+				event.preventDefault();
+				// 计算moveArr最后两点间的间隔
+				speed = moveArr[moveArr.length - 1] - moveArr[moveArr.length - 2];
+				// 计算加上惯性移动的位置 	speed的大小就决定了你的速度，计算一个新的有惯性的目标点targetX
+				var targetX = newX + speed * 3;
+				// 判断区间范围不超过限制线
+				if(targetX > 430){
+					targetX = 430;
+					oDiv.style.transition = "all 0.4s cubic-bezier(0.15, 0.85, 0.15, 2.08) 0s";
+				}else if(targetX < 0){
+					targetX = 0;
+					oDiv.style.transition = "all 0.4s cubic-bezier(0.15, 0.85, 0.15, 2.08) 0s";
+				}else{
+					oDiv.style.transition = "all 0.4s cubic-bezier(0.15, 0.85, 0.15, 2.08) 0s";
+				}
+				// 通过过渡来实现
+				oDiv.style.left = targetX + "px";
+				// 给newX赋新值
+				newX = targetX;	
+			},false);
+			
+			
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

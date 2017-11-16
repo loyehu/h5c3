@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width" />
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				perspective: 500px;
+			}
+			div{
+				width: 50px;
+				height: 50px;
+				background-color: deeppink;
+				float: left;
+				margin-right: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<section>
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+			<div>5</div>
+			<div>6</div>
+			<div>7</div>
+			<div>8</div>
+			<div>9</div>
+		</section>
+		<script type="text/javascript" src="../js/zepto.js" ></script>
+		<script type="text/javascript">
+			
+			$("div").animate(
+				{
+					"background-color": "deepskyblue",
+					"rotate": "500deg",
+					"translateZ": "400px",
+				},
+				2000,
+				function(){
+					$("div").css("background-color","orangered"); 
+				});
+			
+			
+		</script>
+	</body>
+</html>
