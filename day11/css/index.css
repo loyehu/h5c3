@@ -1,0 +1,146 @@
+
+body{
+	background-color: #EBEBEB;
+}
+html{
+	font-size: 15px;
+}
+.banner{
+	width: 100%;
+	height: 222px;
+	overflow: hidden;
+	position: relative;
+}
+.banner .oImg{
+	width: 100%;
+	transform: translateY(-15%);
+}
+.banner .logo{
+	position: absolute;
+	left: 50%;
+	top: 25%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%); 
+}
+
+/*内容部分*/
+.ghost-android{
+	margin-top: 15px;
+	background-color: #EBEBEB;
+	padding: 15px;
+}
+.ghost-android1{
+	padding: 35px;
+	background-color: white;
+	
+}
+.ghost-android .android-title{
+	width: 70%;
+	margin: 0 auto;
+	font-size: 2.2rem;
+}
+.ghost-android .android-title a{
+	color: black;
+}
+.ghost-android .android-title a:hover{
+	text-decoration: none;
+}
+.ghost-android .infor{
+	padding-top: 10px;
+	text-align: center;
+	color: #959595;
+}
+.ghost-android .infor a{
+	color: #E67E22;
+}
+.ghost-android .img{
+	padding: 30px 0;
+	width: 100%;
+}
+.ghost-android .img img{
+	width: 100%;
+}
+.ghost-android .intro{
+	font-size: 1.2rem;
+	line-height: 1.8rem;
+	padding-bottom: 20px;
+}
+.ghost-android .read a{
+	padding: 8px 14px;
+	color: white;
+	font-size: 1rem;
+	background-color: #E67E22;
+}
+.ghost-android .read a:hover{
+	text-decoration: none;
+	background-color: #222;
+}
+.ghost-android1 .line{
+	height: 1px;
+	background-color: #D9D9D9;
+	margin: 35px 0;
+}
+.ghost-android1 .icon a{
+	color: #959595;
+}
+.ghost-android1 .icon a:nth-child(1){
+	padding-left: 30px;
+	position: relative;
+}
+.ghost-android1 .icon a:nth-child(1)::before{
+	content: "";
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	left: 0;
+	top: 0;
+	background: url(../img/file.svg)no-repeat;
+	background-size: cover;
+}
+.ghost-android1 .icon a:hover{
+	color: #E67E22;
+}
+
+/*社区*/
+.community{
+	margin-top: 15px;
+	background-color: #EBEBEB;
+	padding: 15px;
+}
+.community .community-inner{
+	padding: 15px 30px;
+	background-color: white;
+}
+.community .community-inner .com-infor{
+	text-indent: 3px;
+}
+.community .community-inner .line{
+	height: 1px;
+	background-color: #D9D9D9;
+	position: relative;
+}
+.community .community-inner .line::before{
+	content: "";
+	width: 100px;
+	height: 1px;
+	background-color: #E67E22;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.community .community-inner .qq{
+	margin-top: 20px;
+}
+.community .community-inner a{
+	position: relative;
+	color: #E67E22;
+}
+.community .community-inner .weixin a::before{
+	content: "";
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: url(../img/weixin.svg)no-repeat;
+}
