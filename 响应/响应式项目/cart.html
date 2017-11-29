@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的购物车</title>
+		<link rel="stylesheet" href="css/cart.css" />
+	</head>
+	<body>
+		<div class="shop" id="Shop">
+			<h1>我的购物车</h1>
+			<div class="shop-list">
+				<div class="shop-list-check">
+				<input type="checkbox" id="selectAll"/>
+				<i>全选</i>
+				</div>
+			
+			<div class="shop-list-mas">商品信息</div>
+			<div class="shop-list-one">单价（元）</div>
+			<div class="shop-list-s">数量</div>
+			<em>金额（元）</em>
+			<span>操作</span>
+			</div>
+			
+			<!--<div class="goods">
+				<div class="goods-box">4
+					<input type="checkbox" class="chkbox" />
+					<input type="hidden" class="goods_id" value="商品id"/>
+					<img src=" http://imgs-qn.iliangcang.com/ware/goods/big/2/256/256622.jpg " alt="" />
+					<p>迷你便携式果汁榨汁机 英国畅销智能小家电</p>
+				</div>
+				<div class="goods-one">1199</div>
+				<div class="goods-lists">
+					<span class="left-button">-</span>
+					<input type="text" class="center-text" value="1"/>
+					<span class="right-button">+</span>
+				</div>
+				<div class="goods-sum">1199</div>
+				<div class="goods-op">
+					<span>删除</span>
+				</div>
+			</div>-->
+			
+			
+			
+			
+		</div>
+		<div class="shop-set" id="shopSet">
+			<div class="shop-set-box">
+				<span id="Delete">选择删除</span>
+				<div class="shop-set-box-ri">
+					<p class="shop-set-box-ri-1">
+						已选商品
+						<em id="Amount">0</em>
+						<span>
+							总价（不含运费）
+							<em id="Money">￥0</em>
+						</span>
+					</p>
+					<a id="checkout">去结算</a>
+				</div>
+			</div>
+		</div>
+		
+	    
+	    <script src="js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
+	    <script type="text/javascript">
+	
+				
+			$.ajax({
+				"url": "http://h6.duchengjiu.top/shop/api_cart.php?token="+localStorage.getItem("token"),
+				"type": "get",
+				"dataType": "json",
+				"success": function(response){
+					console.log(response);
+					//判断购物车中有没有商品
+					if(response.data.length > 0 ){
+						//循环数据
+						for(var i=0;i<response.data.length;i++){
+							var obj = response.data[i];
+							
+							var html = `<div class="goods">
+											<div class="goods-box">
+												<input type="checkbox" class="chkbox" />
+												<input type="hidden" class="goods_id" value=" ${ obj.goods_id } "/>
+												<img src=" ${ obj.goods_thumb } " alt="" />
+												<p> ${ obj.goods_name } </p>
+											</div>
+											<div class="goods-one">${ obj.goods_price }</div>
+											<div class="goods-lists">
+												<span class="left-button">-</span>
+												<input type="text" class="center-text" value="${ obj.goods_number }"/>
+												<span class="right-button">+</span>
+											</div>
+											<div class="goods-sum">${ obj.goods_price * obj.goods_number }</div>
+											<div class="goods-op">
+												<span>删除</span>
+											</div>
+										</div>`;
+										
+								$("#Shop").html( $("#Shop").html()  +html  );
+							
+						}
+//						console.log($(".goods-op"))
+						// 当前商品删除事件
+						$(".goods-op").click(function(){
+							
+							alert("您是否删除这件商品！")
+							// DOM操作中的删除，后台数据库并没有删除	
+							var goods = this.parentNode;		// 找到当前节点的父亲节点，并删除
+//							console.log(goods);
+							// 删除数据库的数据
+							removeNumberAjax(this,0);
+							
+							// 删除DOM节点
+							$(goods).remove();
+						});	
+						
+						// 减号删除事件
+						$(".left-button").click(function(){
+							// 调用封装函数
+							upDataCart(this,'-1');
+						});
+						// 加号监听事件
+						$(".right-button").click(function(){
+							upDataCart(this,'+1');
+						});
+						
+						// 键盘事件监听  键盘事件会和输入事件有冲突，此时选择其一
+//						$(".center-text").keydown(function(event){
+//							setpSetGoods(this,event);
+//						})
+						
+						// 输入商品数量事件绑定
+						$(".center-text").blur(function(){		
+							setGoods(this);
+						})
+						
+						
+					}
+				}
+			});
+			
+			// 选中商品信息删除
+			$("#Delete").click(function(){
+				// 找到复选框选中状态的商品信息
+				var inputs = $(".goods input:checked");
+//				console.log(inputs);
+
+				for(var i = 0; i < inputs.length; i++){
+					// 获取隐藏input 的商品id
+					var goods_id = document.getElementsByClassName("goods_id")[0].value;
+	//				console.log(goods_id)
+					// 找到最外层的goods
+					
+					var goodsL = inputs[i].parentNode.parentNode;
+					var objPa = inputs[i].parentNode;
+					// 删除数据库中商品数据
+					removeNumberAjax(objPa,0);
+					
+					// 原生JS方法删除DOM节点（找到父亲，删除儿子节点）
+					goodsL.parentNode.removeChild(goodsL);
+				}
+				
+			});
+			
+			// 全选按钮点击函数	全局委托
+			$("#Shop").click(function(event){
+				// 全选 selectAll
+				if(event.target.id === "selectAll"){
+					// 得到全选按钮当前的选中状态存入变量
+					var selected = event.target.checked;
+//					console.log(selected);
+//					console.log(event.target);
+					// 通过类名得到商品复选框的类数组
+					var checkboxs = document.getElementsByClassName("chkbox");
+//					console.log(checkboxs);
+					// 遍历类数组
+					for(var i = 0; i < checkboxs.length; i++){
+						// 把复选框的选中状态 通过赋值 和全选按钮一致
+						checkboxs[i].checked = selected;
+					}
+					showSum();	
+					// 全选状态下显示总价，不用再执行后面的显示总价和数量的代码，直接return
+					return;
+				}
+				// 除了全选状态的事件
+				if(event.target.type === "checkbox"){
+					showSum();
+				}
+			})
+
+			// 显示总价和数量函数
+			function showSum(){
+				// 动态的到类数组
+				var goods = document.getElementsByClassName("goods");
+				
+				// 累加器 
+				var sum = 0;	// 总价 	
+				var num = 0;	// 数量
+				
+				for(var i = 0; i < goods.length; i++){
+					
+					var objGoods = goods[i];
+					
+					// 判断 复选框是否是选中状态
+					if( $(objGoods).children("div:first").children("input").is(":checked") ){
+						// 累加
+						sum += parseInt( $(objGoods).children("div:eq(3)").text() );
+						num += parseInt( $(objGoods).children("div:eq(2)").children("input").val() );
+					}	
+				}
+				
+				// 将总价和数量显示到对应位置
+				$("#Money").text("￥" + sum);
+				$("#Amount").text(num);
+			}
+
+			// 改变购物车商品数量的业务函数	obj当前触发事件的元素，num： -1 +1
+			function upDataCart(obj,num){
+				// 找对象
+				var Goods = obj.parentNode.parentNode;
+				//  隐藏input的goods_id
+				var goods_id = Goods.getElementsByClassName("goods_id")[0].value;
+				// 商品数量
+				var goods_number = Goods.getElementsByClassName("center-text")[0];
+				var goods_number_value = parseInt(goods_number.value);
+				// 商品单价
+				var goods_price = Goods.getElementsByClassName("goods-one")[0];
+				var good_price_value = parseInt(goods_price.innerText);
+				// 商品总价
+				var goods_subtotal = Goods.getElementsByClassName("goods-sum")[0];
+				
+				// 判断范围(1~10)
+				if( num == "-1" && goods_number_value <= 1 ){
+					return;
+				}
+				if( num == "+1" && goods_number_value >= 10 ){
+					return ;
+				}
+				
+				if(num == "-1"){
+					goods_number_value--;
+				}
+				else if(num == "+1"){
+					goods_number_value++;
+				}
+				else if( num > 0 ){
+					goods_number_value = num;
+				}
+				else{
+					goods_number_value = 1;
+				}
+				
+				// 当前商品的值	信号量改变后的值
+				goods_number.value = goods_number_value;
+				
+				// 算出合计金额
+				var subtotal = good_price_value * goods_number_value;
+				
+				// 把合计金额写入页面
+				goods_subtotal.innerText = subtotal;
+				showSum();
+			}
+
+			// 键盘按键事件监听
+			function setpSetGoods(obj,event){
+				// 兼容性处理
+				var event = event || window.event;
+				// 阻止默认事件
+				event.preventDefault();
+				// 判断按键
+				if(event.keyCode === 38){
+					upDataCart(obj,"+1");
+				}
+				else if(event.keyCode === 40){
+					upDataCart(obj,"-1");
+				}
+			}
+			
+			// 商品数量输入函数
+			function setGoods(obj){
+				
+				var goodsNumber = parseInt($(obj).val());
+				
+				console.log(typeof goodsNumber);
+				// 判断输入内容	isNaN(goodsNumber) 不是一个数字
+				if( goodsNumber < 1 || isNaN(goodsNumber) ){
+					$(obj).val(1);
+				}
+				else if(goodsNumber > 10){
+					$(obj).val(10);
+				}
+				
+			}
+			
+			// 删除数据库商品函数
+			function removeNumberAjax(obj,num){
+				var goods = obj.parentNode;
+				// 得到当前要删除商品的ID
+				var goods_id = goods.getElementsByClassName("goods_id")[0].value;
+				console.log(goods_id);
+				
+				$.ajax({
+					"url": "http://h6.duchengjiu.top/shop/api_cart.php?token=" + localStorage.getItem("token"),
+					"type": "POST",
+					"dataType": "json",
+					"data": {
+						"goods_id": goods_id,
+						"number": num
+					},
+					"success": function(response){
+						console.log(response);
+						 showSum();
+					}
+				});
+			}
+			
+			// 结算订单函数,并把金额带过去
+			$("#checkout").click(function(){
+				
+				var sum = $("#Money").text().substr(1);
+				console.log(sum);
+				location.href = "checkout.html?sum=" + sum;
+				
+			})
+			
+			
+	    </script>
+	</body>
+</html>

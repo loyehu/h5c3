@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box li{
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<p class="search"> 
+			<input type="text" id="search"/>
+			<input type="button" id="btn" value="搜索"/>
+		</p>
+		
+		<ul id="box"></ul>
+		
+		<button id="cart">购物车</button>
+		
+		<script src="js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		
+			// 搜索内容显示
+			var str = window.location.search.substr(1);		// substr(1)从字符串下标为1的开始截取，到最后一个字符
+			var searchText = str.split("=")[1];
+			
+			// 转码
+			searchText = decodeURI(searchText);
+			console.log(searchText);
+			
+			// 获取搜索数据
+			$.ajax({
+				"url": "http://h6.duchengjiu.top/shop/api_goods.php",
+				"type": "GET",
+				"data": {
+					"search_text": searchText
+				},
+				"dataType": "json",
+				"success": function(response){
+					console.log(response);
+					var obj = response;
+					for(var i = 0; i < obj.data.length; i++){
+						var html = "";
+						html += "<li><a href='detail.html?goodS_id="+ obj.data[i].goods_id +"'>";
+						html += "<img src='"+ obj.data[i].goods_thumb +"'></a>";
+						html += "<p><a href='detail.html?goodS_id="+ obj.data[i].goods_id +"'>"+ obj.data[i].goods_name +"</a></p>";
+						html += "<p>"+ obj.data[i].goods_desc +"</p></li>";
+						$("#box").append(html);
+					}
+				}
+			});
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

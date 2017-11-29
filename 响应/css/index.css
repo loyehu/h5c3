@@ -1,0 +1,62 @@
+
+/*通用样式*/
+*{
+	margin: 0;
+	padding: 0;
+}
+ul{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+
+/*头部样式*/
+header{
+	width: 100%;
+	background-color: #ededed;
+}
+header .head{
+	width: 75%;
+	height: 50px;
+	margin: 0 auto;
+}
+header .head .logo{
+	display: block;
+	width: 40px;
+	height: 40px;
+	float: left;
+	margin-top: 5px;
+}
+header .head .logo img{
+	width: 100%;
+}
+header .head .search{
+	width: 50%;
+	height: 40px;
+	float: left;
+	margin: 5px 17%; 
+}
+header .head .search #search{
+	width: 40%;
+	height: 60%;
+	
+}
+
+/*导航*/
+#nav{
+	width: 75%;
+	height: 50px;
+	line-height: 50px;
+
+	margin: 0 auto;
+}
+#nav li{
+	float: left;
+	padding: 0 3%;
+}
+
+/*section内容*/
+.goodList li{
+	float: left;
+}
